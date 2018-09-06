@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>构造方法最终版本</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<script>
+		
+		function Dog(Option){
+			this._init(Option);
+		};
+		//通过构造函数调用prototype的方法，动态的向构造函数中添加属性或者方法。
+		Dog.prototype = {
+			_init: function(Option){
+				this.name = Option.name;
+				this.age = Option.age;
+				this.sex = Option.sex;
+			},
+			Walk: function(SomeWhere){
+				console.log(this.name + "正在" + SomeWhere);
+			},
+			Eat: function(SomeThing){
+				console.log(this.name + "正在吃" + SomeWhere);
+			},
+			Sleep: function(){
+				console.log(this.name + "正在睡觉");
+			}
+		};
+		var smallDog = new Dog({name: "小花", age: 15, sex: "gril"});
+		smallDog.Walk("人民广场");
+
+	</script>
+</body>
+</html>
