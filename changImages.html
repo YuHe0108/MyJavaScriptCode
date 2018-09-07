@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>根据小图片切换大图片</title>
+	<link rel="stylesheet" href="">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.c_father {
+			height: 500px;
+			width: 500px;
+			box-sizing: border-box;
+			margin: 80px auto;
+		}
+		#i_top {
+			height: 60px;
+			width: 500px;
+			margin-bottom: 5px;
+			text-align: left;
+			line-height: 60px;
+			font-size: 30px;
+			font-family: "宋体";
+			color: orange;
+		}
+		#i_cont {
+			height: 300px;
+			width: 500px;
+			margin-bottom: 20px;
+		}
+		#i_cont .c_big {
+			height: 300px;
+			width: 500px;
+		}
+		#i_bot {
+			height: 100px;
+		}
+		#i_bot .c_small {
+			height: 100px;
+			width: 60px;
+			float: left;
+			margin-left: 33px;
+			cursor: pointer;
+		}
+	</style>
+	<script>
+		window.onload = function () {
+			var aImgs = document.getElementsByTagName('img');
+			var oBig = aImgs[0];
+			var oSpa = document.getElementsByTagName('span')[0];
+
+			for (var i = 1; i < aImgs.length; i++) {
+				aImgs[i].onclick = function () {
+					var oSrc = this.getAttribute("src");
+					var oDec = this.getAttribute("dec");
+					oBig.setAttribute("src", oSrc);
+					oSpa.innerText = oDec;
+				};
+			}
+		};
+	</script>
+</head>
+<body>
+	<div id="i_father" class="c_father">
+		<div id="i_top">
+			<span>一段描述</span>
+		</div>
+		<div id="i_cont"> 
+			<img src="images/风景1.jpg" alt="" class="c_big">
+		</div>
+		<div id="i_bot">
+			<img src="images/风景1.jpg" alt="" class="c_small" id="i_img1" dec="大山">
+			<img src="images/风景2.jpg" alt="" class="c_small" dec="法国建筑">
+			<img src="images/风景3.jpg" alt="" class="c_small" dec="宇宙星空">
+			<img src="images/风景4.jpg" alt="" class="c_small" dec="神奇建筑">
+			<img src="images/风景5.jpg" alt="" class="c_small" dec="护城河畔">
+		</div>
+	</div>
+</body>
+</html>
