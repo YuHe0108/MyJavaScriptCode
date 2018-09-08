@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>容器属性</title>
+	<link rel="stylesheet" href="">
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		.c_father {
+			margin-left: 33%;
+			margin-top: 5%;
+		}
+		#i_smouse{
+			width: 360px;
+			height: 60px;
+			box-sizing: border-box;
+		}
+		.c_bmouse{
+			height: 430px;
+			width: 430px;
+			margin-bottom: 20px;
+		}
+		ul{
+			height: 60px;
+			width: 430px;
+			
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			
+			cursor: pointer;
+		}
+		.actived{
+			border: 2px solid #000;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+<body>
+	<div class="c_father">
+		<div class="c_bmouse">
+			<img src="mouse/big_mouse1.jpg" alt="" id="i_big">
+		</div>
+		<div id="i_smouse" class="c_smouse">
+			<ul>
+				<li><a href="http://www.baidu.com"><img src="mouse/small_mouse1.jpg" alt=""></a></li>
+				<li><img src="mouse/small_mouse2.jpg" alt=""></li>
+				<li><img src="mouse/small_mouse3.jpg" alt=""></li>
+				<li><img src="mouse/small_mouse4.jpg" alt=""></li>
+				<li><img src="mouse/small_mouse5.jpg" alt=""></li>
+			</ul>
+		</div>
+	</div>
+	<!-- 
+		容器属性的用法：
+
+	 -->
+	 <script>
+	 	window.onload = function () {
+	 		var oBigImg = document.getElementById('i_big'); //获得大图片的标签元素
+	 		var bigSrc = oBigImg.getAttribute("src");//获取大图片的src
+	 		// oBigImg.setAttribute("src", "mouse/big_mouse2.jpg");
+	 		
+	 		var oSmaImg = document.getElementsByTagName('img');
+	 		for (var i = 1; i < oSmaImg.length; i++) {
+	 			oSmaImg[i].index = i;
+	 			oSmaImg[i].onmouseover = function () {
+	 				var src = "mouse/big_mouse" + this.index + ".jpg";
+	 				// console.log(src);
+	 				oBigImg.setAttribute("src", src);
+	 				this.className = "actived";
+	 			};
+	 			oSmaImg[i].onmouseout = function () {
+	 				this.className = "";
+	 			};
+	 		}
+
+
+	 	};
+	 </script>
+</body>
+</html>
