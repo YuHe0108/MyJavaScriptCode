@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>网页换肤</title>
+	<link rel="stylesheet" href="">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		body{
+			background: url("background/back1.jpg");
+		}
+		.c_father {
+			position: relative;
+			height: 100%;
+			width: 100%;
+		}
+		ul {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+			display: none;
+		}
+		ul li img {
+			margin-top: 30px;
+			height: 118px;
+			width: 178px;
+			cursor: pointer;
+		}
+		.c_icons {
+			position: absolute;
+			width: 50px;
+			height: 50px;
+			left: 45%;
+			cursor: pointer;
+		}
+	</style>
+	<script>
+		window.onload = function () {
+			var oImg = document.getElementById("i_son");
+			var aImgs = oImg.getElementsByTagName("img");
+			var oDiv = document.getElementById("i_father");
+			for (var i = 0; i < aImgs.length; i++) {
+				aImgs[i].index = i + 1;
+				aImgs[i].onclick = function () {
+					document.body.style.background = 'url("background/back'+ this.index +'.jpg")';
+				}; 
+			}
+
+			var oIcon = document.getElementById("i_icons");
+			var oUl = document.getElementById("i_img");
+			oIcon.index = 0;
+			oIcon.onclick = function () {
+				if (this.index % 2 === 0) {
+					oUl.style.display = "flex";
+				} else {
+					oUl.style.display = "none";
+				}
+				this.index ++;
+			};
+		};
+	</script>
+</head>
+<body>
+	<div id="i_father" class="c_father">
+		<div id="i_son" claas="c_son">
+			<ul id="i_img">
+				<li><img src="background/back1.jpg" alt=""></li>
+				<li><img src="background/back2.jpg" alt=""></li>
+				<li><img src="background/back3.jpg" alt=""></li>
+				<li><img src="background/back4.jpg" alt=""></li>
+				<li><img src="background/back5.jpg" alt=""></li>
+			</ul>
+		</div>
+		<img src="icons/down.png" alt="" id="i_icons" class="c_icons">
+	</div>
+</body>
+</html>
