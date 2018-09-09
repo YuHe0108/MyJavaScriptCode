@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>发表评论</title>
+	<link rel="stylesheet" href="">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none; 
+		}
+		.c_father {
+			width: 600px;
+			border: 1px solid #ccc;
+			margin: 100px auto;
+			text-align: center;
+			padding: 10px;
+		}
+		.c_father .c_textarea {
+			width: 90%;
+			display: block;
+			margin: 0 auto;
+			margin-bottom: 20px;
+			margin-top: 20px;
+			font-size: 20px;
+		}
+		.c_father ul li {
+			margin-top: 10px;
+			border-bottom: 1px dashed #ccc;
+			line-height: 38px;
+			text-align: left;
+			padding: 4px;
+		}
+		a {
+			text-decoration: none;
+			float: right;
+			color: black;
+		}
+		button {
+			margin-left: -471px;
+			width: 74px;
+			height: 38px;
+			font-size: 20px;
+			color: white;
+			background: green;
+			border-radius: 50px; //设置为圆角
+		}
+		label {
+			font-size: 25px;
+		}
+	</style>
+	<script>
+		window.onload = function () {
+			var oBut = document.getElementsByTagName("button")[0];
+			var oTextArea = document.getElementsByTagName("textarea")[0];
+			var oUl = document.getElementsByTagName("ul")[0];
+			oBut.onclick = function () {
+				var Str = oTextArea.value;  //获取在文本框中输入的内容
+				var oNewLi = document.createElement("li");
+				var oA = document.createElement("a");
+				var aLis = oUl.getElementsByTagName("li"); //如果aLis的长度为1，则表明这是第一个添加的			
+				oNewLi.innerHTML = Str;
+				if (Str === '') {
+					alert("您还没有输入内容哟!");
+				} else {
+					oA.innerHTML = "删除";
+					oA.setAttribute("href", "#");
+					oNewLi.appendChild(oA);
+
+					console.log(aLis.length);
+					if (aLis.length === 0) {
+						oUl.appendChild(oNewLi);
+					} else {
+						oUl.insertBefore(oNewLi, aLis[0]);
+					}
+					
+					var aAtags = document.getElementsByTagName("a");
+
+					for (var i = 0; i < aAtags.length; i++) {
+						aAtags[i].onclick = function () {
+							var oParentNode = this.parentNode;
+							oParentNode.remove();
+						};
+					}
+				}
+			};
+		};
+	</script>
+</head>
+<body>
+	<div id="i_father" class="c_father">
+		<label>请在此处发表言论</label>
+		<textarea class="c_textarea" id="i_textarea" cols="30" rows="10"></textarea>
+		<button>发表</button>
+		<ul>
+			<!-- <li>中国你好<a href="#" id="i_a">删除</a></li> -->
+		</ul>
+	</div>
+</body>
+</html>
