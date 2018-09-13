@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>小罐茶放大镜特效</title>
+	<link rel="stylesheet" href="">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		.c-father {
+			width: 430px;
+			height: 432px;
+			margin: 100px 80px;
+			position: relative;
+			text-align: center;
+			border: 1px solid #ccc;
+		}
+		img {
+			cursor: pointer;
+		}
+		.c-mask {
+			height: 100px;
+			width: 100px;
+			background-color: rgba(255, 255, 0, 0.5);
+			/*float: left;*/
+			position: absolute;
+			top: 0;
+			left: 0;
+			cursor: move;
+			display: none;
+		}
+		.c-bot {
+			height: 60px;
+			width: 430px;
+			margin-top: 10px;
+		}
+		.c-bot ul {
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+		}
+		.c-bot ul li {
+			height: 70px;
+			width: 70px;
+			text-align: center;
+			box-sizing: border-box;
+		}
+		.c-right {
+			width: 450px;
+			height: 430px;
+			position: absolute;
+			left: 550px;
+			top: 100px;
+			overflow: hidden;
+			border: 1px solid #ccc;
+			display: none;
+		}
+		.c-right img {
+			position: absolute;
+			left: 0;
+			right: 0;
+		}
+		.actived {
+			border: 2px solid #000;
+		}
+	</style>
+	<script>
+		window.onload = function () {
+			var oDiv = document.getElementById("i_father");
+			var oMask = oDiv.children[0];
+			var oTop = oDiv.children[1];
+			var NorImg = oTop.children[0];
+			var oBot = document.getElementById("i_bot");
+			var aLis = oBot.getElementsByTagName("li");
+			var oRight = document.getElementById("i_right");
+			var BigImg = oRight.children[0];
+			// console.log(BigImg.src);
+
+			for (var i = 0; i < aLis.length; i++) {
+				aLis[i].index = i;
+				aLis[i].onmouseover = function () {
+					// oMask.style.display = "none";
+					// oRight.style.display = "block";
+					this.className = "actived";
+					// console.log(this.index);
+					var NorSrc = "teaImages/tea00" + this.index + ".jpg";
+					NorImg.src = NorSrc;
+					var BigSrc= "teaImages/tea0" + this.index + ".jpg";
+					BigImg.src = BigSrc;
+				};
+				aLis[i].onmouseout = function () {
+					this.className = "";
+				};
+			}
+
+			// oMask.onmouseover = function (event) {
+			// 	var MaskX = event.clientX - oDiv.offsetLeft - (oMask.offsetWidth * 0.5);
+			// 	var MaskY = event.clientY - oDiv.offsetTop - (oMask.offsetHeight * 0.5);
+				
+			// 	oMask.style.left = MaskX + "px";
+			// 	oMask.style.top = MaskY + "px";
+			// };
+			
+			oDiv.onmouseover = function () {
+				oMask.style.display = "block";
+			};
+			oDiv.onmouseout = function () {
+				oMask.style.display = "none";
+			};
+			oMask.onmousemove = function (event) {
+				var SpanX = event.clientX - oDiv.offsetLeft - (oMask.offsetWidth * 0.5);
+				var SpanY = event.clientY - oDiv.offsetTop - (oMask.offsetHeight * 0.5);
+				oRight.style.display = "block";
+				if (SpanX <= 0) {
+					SpanX = 0;
+				} 
+				if (SpanX >= oDiv.offsetWidth - oMask.offsetWidth) {
+					SpanX =  oDiv.offsetWidth - oMask.offsetWidth;
+				}
+				if (SpanY <= 0) {
+					SpanY = 0;
+				}
+				if (SpanY >= oDiv.offsetHeight - oMask.offsetHeight) {
+					SpanY = oDiv.offsetHeight - oMask.offsetHeight;
+				}
+
+				oMask.style.left = SpanX + "px";
+				oMask.style.top = SpanY + "px";
+				// 让大图进行移动，公式：  smallX / bigX = smallbox.width / bigBox.width;
+				// bigX = smallX / (smallbox.width / bigbox.width);
+				var bigX = -SpanX / (oDiv.offsetWidth / oRight.offsetWidth);
+				var bigY = -SpanY / (oDiv.offsetHeight / oRight.offsetHeight);
+				BigImg.style.left = bigX + "px";
+				BigImg.style.top = bigY + "px";
+			};
+			oMask.onmouseout = function () {
+				oRight.style.display = "none";
+			};
+
+		};
+	</script>
+</head>
+<body>
+	<div id="i_father" class="c-father">
+		<span id="i_mask" class="c-mask"></span>
+		<div id="i_top" class="c-top">
+			<img src="teaImages/tea000.jpg" alt="">
+		</div>
+		<div id="i_bot" class="c-bot">
+			<ul>
+				<li><img src="teaImages/tea0000.jpg" alt=""></li>
+				<li><img src="teaImages/tea0001.jpg" alt=""></li>
+				<li><img src="teaImages/tea0002.jpg" alt=""></li>
+				<li><img src="teaImages/tea0003.jpg" alt=""></li>
+				<li><img src="teaImages/tea0004.jpg" alt=""></li>
+			</ul>
+		</div>
+	</div>
+	<div id="i_right" class="c-right">
+		<img src="teaImages/tea00.jpg" alt="">
+	</div>
+</body>
+</html>
